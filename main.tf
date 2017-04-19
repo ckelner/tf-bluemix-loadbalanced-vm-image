@@ -11,17 +11,6 @@ provider "ibmcloud" {
 }
 
 ##############################################################################
-# IBM SSH Key: For connecting to VMs
-# http://ibmcloudterraformdocs.chriskelner.com/docs/providers/ibmcloud/r/infra_ssh_key.html
-##############################################################################
-resource "ibmcloud_infra_ssh_key" "ssh_key" {
-  label = "demo"
-  notes = "demo"
-  # Public key, so this is completely safe
-  public_key = "${var.public_key}"
-}
-
-##############################################################################
 # IBM VM Image Data Source: For getting the VM image id to use by name
 # http://ibmcloudterraformdocs.chriskelner.com/docs/providers/ibmcloud/d/infra_image_template.html
 ##############################################################################
@@ -47,9 +36,6 @@ resource "ibmcloud_infra_virtual_guest" "web_node" {
   cores                = "${var.vm_cores}"
   memory               = "${var.vm_memory}"
   local_disk           = true
-  ssh_key_ids = [
-    "${ibmcloud_infra_ssh_key.ssh_key.id}"
-  ]
   # applys tags to the VM
   tags = "${var.vm_tags}"
 }
@@ -105,11 +91,6 @@ variable slaccountnum {
 # The datacenter to deploy to
 variable datacenter {
   default = "dal06"
-}
-# The SSH Key to use on the Nginx virtual machines
-# Defined in terraform.tfvars
-variable public_key {
-  description = "Your public SSH key"
 }
 # The number of web nodes to deploy; You can adjust this number to create more
 # virtual machines in the IBM Cloud; adjusting this number also updates the
