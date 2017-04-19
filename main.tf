@@ -115,7 +115,7 @@ variable public_key {
 # virtual machines in the IBM Cloud; adjusting this number also updates the
 # loadbalancer with the new node
 variable node_count {
-  default = 2
+  default = 5
 }
 # The vm image name for the web nodes
 variable vm_image_name {}
