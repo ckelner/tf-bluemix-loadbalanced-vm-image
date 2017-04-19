@@ -17,7 +17,6 @@ This template will create the following resources:
 - [Usage](#usage)
 - [Available Data Centers](#available-data-centers)
 - [Running in Multiple Data centers](#running-in-multiple-data-centers)
-- [Dependency Graph](#dependency-graph)
 - [Setting up Provider Credentials](#setting-up-provider-credentials)
   - [Environment Variables using IBMid credentials](#environment-variables-using-ibmid-credentials)
     - [IBMid Credentials](#ibmid-credentials)
@@ -124,10 +123,6 @@ Simply run `terraform plan -var 'datacenter=lon02' -state=lon02.tfstate` or what
 # Video of Terraform Execution
 
 [Click here to watch a video of Terraform Plan, Apply, and Destroy](https://youtu.be/vTKeWTfalTU)
-
-# Dependency Graph
-
-![graph](graph.png)
 
 # Setting up Provider Credentials
 
