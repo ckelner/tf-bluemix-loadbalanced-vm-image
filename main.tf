@@ -50,32 +50,6 @@ resource "ibmcloud_infra_virtual_guest" "web_node" {
   ssh_key_ids = [
     "${ibmcloud_infra_ssh_key.ssh_key.id}"
   ]
-  # Installs nginx web server on our VM via SSH
-  provisioner "remote-exec" {
-    connection {
-        type = "ssh"
-        user = "root"
-        # This is stored in a file not checked into source control
-        private_key = "${var.private_key_material}"
-    }
-    inline = [
-      "apt-get update -y",
-      # Install nginx
-      "apt-get install --yes --force-yes nginx",
-      # Overwrite default nginx welcome page w/ mac address of VM NIC
-      "echo \"<h1>I am $(cat /sys/class/net/eth0/address)</h1>\" > \"/var/www/html/index.nginx-debian.html\""
-    ]
-  }
-  provisioner "file" {
-    connection {
-        type = "ssh"
-        user = "root"
-        # This is stored in a file not checked into source control
-        private_key = "${var.private_key_material}"
-    }
-    source = "hello.conf"
-    destination = "/etc/nginx/conf.d/hello.conf"
-  }
   # applys tags to the VM
   tags = "${var.vm_tags}"
 }
