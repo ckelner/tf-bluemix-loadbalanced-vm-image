@@ -1,0 +1,6 @@
+terraform.tfstate*
+.terraform.tfstate.lock.info
+# when using `terraform plan -out=<name>.out` to pass to apply
+*.out
+crash.log
+.terraform
